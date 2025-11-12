@@ -1,13 +1,8 @@
 # Base image
-FROM python:3.8-slim-buster
+FROM python:3.10-slim-bullseye
 
 # Set the working directory
 WORKDIR /fwdbot
-
-# Update apt repositories to use the Debian archive
-RUN echo "deb http://archive.debian.org/debian/ buster main" > /etc/apt/sources.list && \
-    echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list && \
-    echo "deb http://archive.debian.org/debian/ buster-updates main" >> /etc/apt/sources.list
 
 # Install system dependencies
 RUN apt-get update && \
