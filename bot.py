@@ -11,8 +11,6 @@ from pyrogram import Client, __version__
 from pyrogram.raw.all import layer 
 from pyrogram.enums import ParseMode
 from pyrogram.errors import FloodWait 
-from aiohttp import web
-from plugins import web_server 
 
 #Dont Remove My Credit @Silicon_Bot_Update 
 #This Repo Is By @Silicon_Official 
@@ -39,10 +37,6 @@ class Bot(Client):
         await super().start()
         me = await self.get_me()
         logging.info(f"{me.first_name} with for pyrogram v{__version__} (Layer {layer}) started on @{me.username}.")
-        app = web.AppRunner(await web_server())
-        await app.setup()
-        bind_address = "0.0.0.0"
-        await web.TCPSite(app, bind_address, Config.PORT).start()
         self.id = me.id
         self.username = me.username
         self.first_name = me.first_name
