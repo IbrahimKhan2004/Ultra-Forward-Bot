@@ -2,10 +2,12 @@
 #This Repo Is By @Silicon_Official 
 # For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
 
+import sys
 from os import environ 
 from config import Config
 import motor.motor_asyncio
 from pymongo import MongoClient
+from pymongo.errors import ConfigurationError
 
 async def mongodb_version():
     x = MongoClient(Config.DATABASE_URI)
@@ -182,4 +184,8 @@ class Database:
 #This Repo Is By @Silicon_Official 
 # For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
     
-db = Database(Config.DATABASE_URI, Config.DATABASE_NAME)
+try:
+    db = Database(Config.DATABASE_URI, Config.DATABASE_NAME)
+except ConfigurationError:
+    print("Looks like that the DATABASE_URI is not configured correctly. Please check it and try again.")
+    sys.exit(1)
